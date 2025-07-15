@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>চুক্তিপত্র - Genius Creations Contracting Company</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ইন্টার ফন্ট ব্যবহার করা হয়েছে */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            box-sizing: border-box;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #34495e;
+        }
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus, input[type="number"]:focus, select:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        .contract-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        .contract-section p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+            color: #555;
+        }
+        .contract-section strong {
+            color: #2c3e50;
+        }
+        .signature-section {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+        .signature-box {
+            text-align: center;
+            margin: 20px;
+            min-width: 250px;
+        }
+        .signature-line {
+            border-bottom: 1px dashed #999;
+            width: 100%;
+            height: 30px;
+            margin-bottom: 10px;
+        }
+        .button-group {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .print-button {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+        }
+        .print-button:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+        .print-instruction {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        /* প্রিন্ট করার জন্য CSS */
+        @media print {
+            html, body {
+                width: 210mm; /* A4 width */
+                height: 297mm; /* A4 height */
+                margin: 0;
+                padding: 0;
+                background-color: #fff;
+                font-size: 9pt; /* Adjusted base font size for printing */
+            }
+            body {
+                margin: 8mm 12mm; /* Slightly reduced A4 margins */
+                box-sizing: border-box;
+            }
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+                padding: 0; /* Remove padding for print to maximize content area within A4 */
+                max-width: 100%;
+                width: 100%; /* Ensure container takes full width within body margins */
+                height: auto; /* Allow height to adjust based on content */
+            }
+            .form-group, .button-group, .print-instruction {
+                display: none; /* ফর্ম ইনপুট, প্রিন্ট বাটন এবং নির্দেশনা প্রিন্ট করার সময় লুকানো হবে */
+            }
+            .contract-section {
+                border-top: none;
+                padding-top: 0;
+            }
+            .contract-section p {
+                margin-bottom: 3px; /* Adjusted paragraph margin for tighter spacing */
+                line-height: 1.2; /* Adjusted line height for tighter spacing */
+            }
+            /* প্রিন্ট করার সময় ইনপুট ফিল্ডের মানগুলো টেক্সট হিসেবে দেখানোর জন্য */
+            .printable-value {
+                display: inline;
+                font-weight: bold;
+                color: #000;
+            }
+            input[type="text"], input[type="number"], select {
+                border: none;
+                padding: 0;
+                display: inline;
+                width: auto;
+            }
+            .signature-section {
+                margin-top: 25px; /* Adjusted margin for signatures */
+            }
+            .signature-box {
+                margin: 8px; /* Adjusted margin for signature boxes */
+            }
+            /* Grid layout for print */
+            .print-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr; /* Two equal columns */
+                gap: 10px; /* Gap between columns */
+            }
+            .print-grid p {
+                margin-bottom: 0; /* Remove bottom margin for paragraphs within grid */
+            }
+            .print-grid .text-right {
+                text-align: right;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>চুক্তিপত্র</h1>
+        <h2>EMPLOYMENT CONTRACT</h2>
+
+        <div class="form-group">
+            <label for="companyNameInput">কোম্পানীর নাম: <span dir="rtl" lang="ar">(اسم الشركة)</span></label>
+            <input type="text" id="companyNameInput" value="Genius Creations Contracting Company" class="rounded-lg">
+        </div>
+
+        <div class="form-group">
+            <label for="secondPartyNameInput">কর্মীর নাম: <span dir="rtl" lang="ar">(اسم الموظف)</span></label>
+            <input type="text" id="secondPartyNameInput" value="MD KAWSAR MIAH" class="rounded-lg">
+        </div>
+
+        <div class="form-group">
+            <label for="passportNo">পাসপোর্ট নম্বর: <span dir="rtl" lang="ar">(رقم جواز السفر)</span></label>
+            <input type="text" id="passportNo" placeholder="আপনার পাসপোর্ট নম্বর লিখুন" class="rounded-lg">
+        </div>
+
+        <div class="form-group">
+            <label for="nationalityInput">জাতীয়তা: <span dir="rtl" lang="ar">(الجنسية)</span></label>
+            <input type="text" id="nationalityInput" value="BANGLADESH" class="rounded-lg">
+        </div>
+
+        <div class="form-group">
+            <label for="professionInput">পেশা: <span dir="rtl" lang="ar">(المهنة)</span></label>
+            <input type="text" id="professionInput" value="Loading and unloading worker" class="rounded-lg">
+        </div>
+
+        <div class="form-group">
+            <label for="salary">মাসিক বেতন (সৌদি রিয়াল): <span dir="rtl" lang="ar">(الراتب الشهري بالريال السعودي)</span></label>
+            <input type="number" id="salary" value="850" class="rounded-lg">
+        </div>
+
+        <div class="form-group">
+            <label for="contractDuration">চুক্তির মেয়াদ (বছর): <span dir="rtl" lang="ar">(مدة العقد بالسنوات)</span></label>
+            <input type="number" id="contractDuration" value="2" class="rounded-lg">
+        </div>
+
+        <div class="contract-section">
+            <p><strong>পক্ষগণ:</strong> <span dir="rtl" lang="ar"> (الأطراف)</span></p>
+            <div class="flex justify-between items-baseline flex-wrap">
+                <p class="w-full md:w-1/2"><strong>প্রথম পক্ষ:</strong> <span id="displayCompanyName" class="printable-value">Genius Creations Contracting Company</span></p>
+                <p class="w-full md:w-1/2 text-right" dir="rtl" lang="ar"><strong>الطرف الأول:</strong> <span id="displayCompanyNameArabic" class="printable-value">شركة جينيوس كرييشنز للمقاولات</span></p>
+            </div>
+            <div class="flex justify-between items-baseline flex-wrap">
+                <p class="w-full md:w-1/2"><strong>দ্বিতীয় পক্ষ:</strong> <span id="secondPartyNameDisplay" class="printable-value">MD KAWSAR MIAH</span></p>
+                <p class="w-full md:w-1/2 text-right" dir="rtl" lang="ar"><strong>الطرف الثاني:</strong> <span id="secondPartyNameArabic" class="printable-value">محمد كوثر مياه</span></p>
+            </div>
+            <div class="flex justify-between items-baseline flex-wrap">
+                <p class="w-full md:w-1/2"><strong>পাসপোর্ট নম্বর:</strong> <span id="displayPassportNo" class="printable-value">A03524849</span></p>
+                <p class="w-full md:w-1/2 text-right" dir="rtl" lang="ar"><strong>رقم جواز السفر:</strong> <span id="displayPassportNoArabic" class="printable-value">A03524849</span></p>
+            </div>
+            <div class="flex justify-between items-baseline flex-wrap">
+                <p class="w-full md:w-1/2"><strong>জাতীয়তা:</strong> <span id="nationalityDisplay" class="printable-value">BANGLADESH</span></p>
+                <p class="w-full md:w-1/2 text-right" dir="rtl" lang="ar"><strong>الجنسية:</strong> <span id="nationalityArabic" class="printable-value">بنغلاديش</span></p>
+            </div>
+            <div class="flex justify-between items-baseline flex-wrap">
+                <p class="w-full md:w-1/2"><strong>পেশা:</strong> <span id="professionDisplay" class="printable-value">Loading and unloading worker</span></p>
+                <p class="w-full md:w-1/2 text-right" dir="rtl" lang="ar"><strong>المهنة:</strong> <span id="professionArabic" class="printable-value">عامل تحميل وتفريغ</span></p>
+            </div>
+
+            <p class="mt-8"><strong>চুক্তির শর্তাবলী:</strong> <span dir="rtl" lang="ar">(شروط العقد)</span></p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4">
+                <p class="text-left">১. প্রথম পক্ষ দ্বিতীয় পক্ষকে মাসিক বেতন <span id="displaySalary" class="printable-value">850 সৌদি রিয়াল</span> প্রদান করবে, এছাড়াও সৌদি শ্রম আইন অনুযায়ী ওভারটাইম প্রদান করা হবে।</p>
+                <p class="text-right" dir="rtl" lang="ar">(1. يدفع الطرف الأول للطرف الثاني راتباً شهرياً قدره 850 ريال سعودي، بالإضافة إلى أجر العمل الإضافي وفقاً لقوانين العمل السعودية.)</p>
+            </div>
+            <p>That the 1st Party shall pay to the 2nd party a monthly salary of <span id="displaySalaryEnglish" class="printable-value">850 SAR</span>. plus overtime accordingly to Saudi Labour Laws.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4">
+                <p class="text-left">২. প্রথম পক্ষ চুক্তির মেয়াদে সৌদি আরবে দ্বিতীয় পক্ষকে বিনামূল্যে চিকিৎসা, বিনামূল্যে ব্যাচেলর আবাসন সুবিধা প্রদান করবে।</p>
+                <p class="text-right" dir="rtl" lang="ar">(2. يوفر الطرف الأول للطرف الثاني الرعاية الطبية المجانية والسكن المجاني للعزاب خلال فترة العقد في المملكة العربية السعودية.)</p>
+            </div>
+            <p>The 1st party should provide 2nd parties free medical, free bachelors’ accommodation facilities during the period of contract in the Kingdom of Saudi Arabia.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4">
+                <p class="text-left">৩. প্রথম পক্ষ দ্বিতীয় পক্ষকে বাসস্থান থেকে কর্মস্থলে বিনামূল্যে যাতায়াত সুবিধা প্রদান করবে।</p>
+                <p class="text-right" dir="rtl" lang="ar">(3. يوفر الطرف الأول للطرف الثاني وسيلة نقل مجانية من السكن إلى مكان العمل.)</p>
+            </div>
+            <p>That the 1st party shall provide free transportation from resident to the work site.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4">
+                <p class="text-left">৪. চুক্তির মেয়াদ <span id="displayContractDuration" class="printable-value">02</span> বছর।</p>
+                <p class="text-right" dir="rtl" lang="ar">(4. مدة العقد سنتان.)</p>
+            </div>
+            <p>The period of contract is of <span id="displayContractDurationEnglish" class="printable-value">02</span> years.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4">
+                <p class="text-left">৫. প্রথম পক্ষ দ্বিতীয় পক্ষের বাংলাদেশ থেকে সৌদি আরব এবং চুক্তি শেষ হওয়ার পর বাংলাদেশে ফেরত আসার বিমান টিকেট খরচ বহন করবে।</p>
+                <p class="text-right" dir="rtl" lang="ar">(5. يتحمل الطرف الأول تكلفة تذكرة الطيران للطرف الثاني من بنغلاديش إلى المملكة العربية السعودية والعودة إلى بنغلاديش بعد انتهاء مدة العقد.)</p>
+            </div>
+            <p>That the 1st party shall bear the passage cost from K.S.A. Back to Dhaka for joining the service (the return ticket would provide after completion of this 2 years agreement only.)</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4">
+                <p class="text-left">৬. দৈনিক কাজের সময় হবে ৮ ঘন্টা (সপ্তাহে একদিন ছুটি)।</p>
+                <p class="text-right" dir="rtl" lang="ar">(6. ساعات العمل اليومية 8 ساعات (يوم عطلة واحد في الأسبوع).)</span></p>
+            </div>
+            <p>Daily working hours shall be 08 hours. (One-day holiday in a week.)</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4">
+                <p class="text-left">৭. এই চুক্তি দ্বিতীয় পক্ষের সৌদি আরবে পৌঁছানোর তারিখ থেকে কার্যকর হবে।</p>
+                <p class="text-right" dir="rtl" lang="ar">(7. يصبح هذا العقد ساري المفعول من تاريخ وصول الطرف الثاني إلى المملكة العربية السعودية.)</p>
+            </div>
+            <p>That this agreement shall come in effect from the date of arrival of the 2nd party in the Kingdom of Saudi Arabia.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4">
+                <p class="text-left">৮. দ্বিতীয় পক্ষ সৌদি আরবে কোম্পানির সমস্ত নির্দেশাবলী এবং নিয়মাবলী মেনে চলতে বাধ্য থাকবে।</p>
+                <p class="text-right" dir="rtl" lang="ar">(8. يتعهد الطرف الثاني بالالتزام بجميع التعليمات والقواعد المعمول بها من قبل الشركة في المملكة العربية السعودية.)</p>
+            </div>
+            <p>That the 2nd party should undertake to abide by the instruction and rules enforced by the company in the Kingdom of Saudi Arabia.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4">
+                <p class="text-left">৯. এই চুক্তিতে উল্লেখ নেই এমন যেকোনো শর্ত সৌদি শ্রম আইন অনুযায়ী কার্যকর হবে।</p>
+                <p class="text-right" dir="rtl" lang="ar">(9. أي شروط وأحكام أخرى لم تُذكر في هذا العقد تتبع قوانين العمل السعودية.)</p>
+            </div>
+            <p>That any other terms and conditions not mentioned in this agreement shall be following as per Saudi Labour Laws.</p>
+        </div>
+
+        <div class="signature-section">
+            <div class="signature-box">
+                <div class="signature-line"></div>
+                <p>প্রথম পক্ষের স্বাক্ষর</p>
+                <p>Signature of the first part</p>
+                <p dir="rtl" lang="ar">توقيع الطرف الأول</p>
+            </div>
+            <div class="signature-box">
+                <div class="signature-line"></div>
+                <p>দ্বিতীয় পক্ষের স্বাক্ষর</p>
+                <p>Signature of the second party</p>
+                <p dir="rtl" lang="ar">توقيع الطرف الثاني</p>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button class="print-button" onclick="window.print()">প্রিন্ট করুন</button>
+            <p class="print-instruction">প্রিন্ট ডায়ালগে "Save as PDF" অপশনটি নির্বাচন করুন।</p>
+        </div>
+    </div>
+
+    <script>
+        // ইনপুট ফিল্ডের রেফারেন্স
+        const companyNameInput = document.getElementById('companyNameInput');
+        const passportNoInput = document.getElementById('passportNo');
+        const secondPartyNameInput = document.getElementById('secondPartyNameInput');
+        const nationalityInput = document.getElementById('nationalityInput');
+        const professionInput = document.getElementById('professionInput');
+        const salaryInput = document.getElementById('salary');
+        const contractDurationInput = document.getElementById('contractDuration');
+
+        // ডিসপ্লে স্প্যানের রেফারেন্স
+        const displayCompanyName = document.getElementById('displayCompanyName');
+        const displayCompanyNameArabic = document.getElementById('displayCompanyNameArabic'); // Added for Arabic company name
+        const secondPartyNameDisplay = document.getElementById('secondPartyNameDisplay');
+        const secondPartyNameArabic = document.getElementById('secondPartyNameArabic'); // Added for Arabic second party name
+        const displayPassportNo = document.getElementById('displayPassportNo');
+        const displayPassportNoArabic = document.getElementById('displayPassportNoArabic'); // Added for Arabic passport number
+        const nationalityDisplay = document.getElementById('nationalityDisplay');
+        const nationalityArabic = document.getElementById('nationalityArabic'); // Added for Arabic nationality
+        const professionDisplay = document.getElementById('professionDisplay');
+        const professionArabic = document.getElementById('professionArabic'); // Added for Arabic profession
+        const displaySalary = document.getElementById('displaySalary');
+        const displaySalaryEnglish = document.getElementById('displaySalaryEnglish');
+        const displayContractDuration = document.getElementById('displayContractDuration');
+        const displayContractDurationEnglish = document.getElementById('displayContractDurationEnglish');
+
+        // নমুনা ডেটা (পাসপোর্ট নম্বরের উপর ভিত্তি করে)
+        const sampleData = {
+            'A03524849': {
+                name: 'MD KAWSAR MIAH',
+                arabicName: 'محمد كوثر مياه',
+                nationality: 'BANGLADESH',
+                arabicNationality: 'بنغلاديش',
+                profession: 'Loading and unloading worker',
+                arabicProfession: 'عامل تحميل وتفريغ'
+            },
+            'B12345678': {
+                name: 'RAHIM UDDIN',
+                arabicName: 'رحيم الدين',
+                nationality: 'INDIA',
+                arabicNationality: 'الهند',
+                profession: 'Construction Worker',
+                arabicProfession: 'عامل بناء'
+            },
+            'C98765432': {
+                name: 'FATEMA BEGUM',
+                arabicName: 'فاطمة بيجوم',
+                nationality: 'PAKISTAN',
+                arabicNationality: 'باكستان',
+                profession: 'Housemaid',
+                arabicProfession: 'عاملة منزلية'
+            }
+            // আপনি এখানে আরও ডেটা যোগ করতে পারেন
+        };
+
+        // ফাংশন যা ইনপুট ফিল্ডের মান ডিসপ্লে স্প্যানে আপডেট করে
+        function updateDisplay() {
+            displayCompanyName.textContent = companyNameInput.value;
+            displayCompanyNameArabic.textContent = 'شركة جينيوس كرييشنز للمقاولات'; // Company name Arabic is static for now
+
+            secondPartyNameDisplay.textContent = secondPartyNameInput.value;
+            displayPassportNo.textContent = passportNoInput.value;
+            nationalityDisplay.textContent = nationalityInput.value;
+            professionDisplay.textContent = professionInput.value;
+            displaySalary.textContent = salaryInput.value + ' সৌদি রিয়াল';
+            displaySalaryEnglish.textContent = salaryInput.value + ' SAR';
+            displayContractDuration.textContent = contractDurationInput.value;
+            displayContractDurationEnglish.textContent = contractDurationInput.value;
+
+            // Update Arabic display for dynamic fields
+            const currentPassport = passportNoInput.value.toUpperCase();
+            if (sampleData[currentPassport]) {
+                secondPartyNameArabic.textContent = sampleData[currentPassport].arabicName;
+                nationalityArabic.textContent = sampleData[currentPassport].arabicNationality;
+                professionArabic.textContent = sampleData[currentPassport].arabicProfession;
+            } else {
+                // If passport not in sampleData, clear Arabic dynamic fields or use English as fallback
+                secondPartyNameArabic.textContent = ''; // Clear if not found
+                nationalityArabic.textContent = '';
+                professionArabic.textContent = '';
+            }
+            displayPassportNoArabic.textContent = passportNoInput.value; // Passport number is usually the same characters
+        }
+
+        // পাসপোর্ট নম্বর পরিবর্তনের ইভেন্ট লিসেনার
+        passportNoInput.addEventListener('input', function() {
+            const passport = this.value.toUpperCase(); // ইনপুটকে আপারকেসে রূপান্তর করুন
+            if (sampleData[passport]) {
+                // যদি পাসপোর্ট নম্বর নমুনা ডেটাতে থাকে, তাহলে ইনপুট ফিল্ডগুলো পূরণ করুন
+                secondPartyNameInput.value = sampleData[passport].name;
+                nationalityInput.value = sampleData[passport].nationality;
+                professionInput.value = sampleData[passport].profession;
+            } else {
+                // যদি পাসপোর্ট নম্বর না থাকে, তাহলে ইনপুট ফিল্ডগুলো খালি রাখুন
+                secondPartyNameInput.value = '';
+                nationalityInput.value = '';
+                professionInput.value = '';
+            }
+            updateDisplay(); // ডিসপ্লে আপডেট করুন
+        });
+
+        // অন্যান্য ইনপুট ফিল্ডের জন্য ইভেন্ট লিসেনার
+        companyNameInput.addEventListener('input', updateDisplay);
+        secondPartyNameInput.addEventListener('input', updateDisplay);
+        nationalityInput.addEventListener('input', updateDisplay);
+        professionInput.addEventListener('input', updateDisplay);
+        salaryInput.addEventListener('input', updateDisplay);
+        contractDurationInput.addEventListener('input', updateDisplay);
+
+        // প্রাথমিক লোডের সময় ডিফল্ট মান সেট করুন এবং ডিসপ্লে আপডেট করুন
+        document.addEventListener('DOMContentLoaded', () => {
+            // ডিফল্ট মান সেট করুন
+            companyNameInput.value = 'Genius Creations Contracting Company';
+            passportNoInput.value = 'A03524849';
+            secondPartyNameInput.value = 'MD KAWSAR MIAH';
+            nationalityInput.value = 'BANGLADESH';
+            professionInput.value = 'Loading and unloading worker';
+            salaryInput.value = '850';
+            contractDurationInput.value = '2';
+
+            updateDisplay(); // সকল ডিসপ্লে স্প্যান প্রাথমিক মান দিয়ে আপডেট করুন
+        });
+    </script>
+</body>
+</html>
